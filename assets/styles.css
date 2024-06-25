@@ -1,0 +1,11 @@
+.color-div {
+    flex-wrap: nowrap;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.cajas{
+    display: flex;
+    flex-direction: row;
+}
