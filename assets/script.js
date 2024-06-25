@@ -1,54 +1,58 @@
-// Variable global para almacenar el color seleccionado
-let currentColor = "";
+// Variable global para almacenar el color según la tecla presionada
+let currentColor = '';
 
-// Función para cambiar el color de un div al negro
-function changeColorToBlack(event) {
-    event.target.style.backgroundColor = "black";
+// Función para cambiar el color del div al hacer clic
+function changeColor(event) {
+  event.target.style.backgroundColor = 'black';
 }
 
-// Añadir evento de click a cada div
-document.getElementById("div1").addEventListener("click", function() {
-    changeColorToBlack(event);
-    currentColor = "pink"; // Color rosado
-});
-document.getElementById("div2").addEventListener("click", function() {
-    changeColorToBlack(event);
-    currentColor = "orange"; // Color naranjo
-});
-document.getElementById("div3").addEventListener("click", function() {
-    changeColorToBlack(event);
-    currentColor = "cyan"; // Color celeste
-});
-document.getElementById("div4").addEventListener("click", function() {
-    changeColorToBlack(event);
-    currentColor = "black"; // Color negro
-});
+// Asignar evento clic a cada color-box
+document.getElementById('blue').addEventListener('click', changeColor);
+document.getElementById('red').addEventListener('click', changeColor);
+document.getElementById('green').addEventListener('click', changeColor);
+document.getElementById('yellow').addEventListener('click', changeColor);
 
-// Evento para cambiar el color del div "key" al presionar teclas
-document.addEventListener("keydown", function(event) {
-    if (event.key === "a") {
-        document.getElementById("key").style.backgroundColor = "pink";
-    } else if (event.key === "s") {
-        document.getElementById("key").style.backgroundColor = "orange";
-    } else if (event.key === "d") {
-        document.getElementById("key").style.backgroundColor = "cyan";
-    } else if (event.key === "q") {
-        createNewDiv("purple");
-    } else if (event.key === "w") {
-        createNewDiv("gray");
-    } else if (event.key === "e") {
-        createNewDiv("brown");
-    }
-});
-
-// Función para crear un nuevo div con el color especificado
-function createNewDiv(color) {
-    let newDiv = document.createElement("div");
-    newDiv.className = "color-div";
-    newDiv.style.backgroundColor = color;
-    newDiv.style.width = "200px";
-    newDiv.style.height = "200px";
-    newDiv.style.cursor = "pointer";
-    newDiv.addEventListener("click", changeColorToBlack);
-    document.body.appendChild(newDiv);
+// Función para manejar el cambio de color del div "key" según la tecla presionada
+function handleKeyPress(event) {
+  switch (event.key) {
+    case 'a':
+      document.getElementById('key').style.backgroundColor = 'pink';
+      currentColor = 'pink';
+      break;
+    case 's':
+      document.getElementById('key').style.backgroundColor = 'orange';
+      currentColor = 'orange';
+      break;
+    case 'd':
+      document.getElementById('key').style.backgroundColor = 'lightblue';
+      currentColor = 'lightblue';
+      break;
+    case 'q':
+      createColorBox('purple');
+      break;
+    case 'w':
+      createColorBox('gray');
+      break;
+    case 'e':
+      createColorBox('brown');
+      break;
+    default:
+      break;
+  }
 }
+
+// Función para crear un nuevo color-box con el color especificado
+function createColorBox(color) {
+  let newDiv = document.createElement('div');
+  newDiv.className = 'color-box';
+  newDiv.style.backgroundColor = color;
+  newDiv.style.width = '200px';
+  newDiv.style.height = '200px';
+  newDiv.style.cursor = 'pointer';
+  newDiv.style.margin = '10px';
+  newDiv.addEventListener('click', changeColor);
+  document.body.appendChild(newDiv);
+}
+
+// Agregar evento de escucha para las teclas presionadas
+document.addEventListener('keydown', handleKeyPress);
